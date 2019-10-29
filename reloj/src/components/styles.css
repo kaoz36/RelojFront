@@ -1,0 +1,22 @@
+.contador {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #ABABAB;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+
+}
+
+.textValor {
+    font-size: 35px;
+    
+}
+
+.textUnidad {
+    font-size: 12px;
+}
