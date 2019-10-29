@@ -17,41 +17,25 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
- const TableHistorical = () => {
+ const TableHistorical = ({data, handleClickRow}) => {
   const classes = useStyles();
-
-  const handleClick = () => {
-    console.log('Click tabla');
-  }
 
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><b>Hora</b></TableCell>
+            <TableCell><b>Historial de Horas</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
+          {data.map(row => (
+            <TableRow key={row._id}>
               <TableCell 
                 component="th"
                 scope="row"
-                onClick={handleClick}>
-                {row.name}
+                onClick={() => handleClickRow(row)}>
+                { `${row.hour} : ${row.minute} : ${row.second}` }
               </TableCell>
             </TableRow>
           ))}
