@@ -1,14 +1,29 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
+import Aguja from './res/aguja.png';
+import AgujaMinutos from './res/agujaMinutos.png';
+import AgujaSegundos from './res/agujaSegundos.png';
+import './res/style.css';
 
- const Reloj = ({hour, minute, second}) => {
+ const Reloj = ({rotateHours, rotateMinutes, rotateSeconds}) => {
 
-  console.log(`reloj ( ${hour} : ${minute} : ${second} )`);
+  if ( document.getElementById("hours") ) {
+    document.getElementById("hours").style.transform = "rotate("+ rotateHours +"deg)";
+  }
+  
+  if ( document.getElementById("minutes") ) {
+    document.getElementById("minutes").style.transform = "rotate("+ rotateMinutes +"deg)";
+  }
 
+  if ( document.getElementById("seconds") ) {
+    document.getElementById("seconds").style.transform = "rotate("+ rotateSeconds +"deg)";
+  }
+  
   return (
-    <Paper>
-      <p>  </p>
-    </Paper>
+    <div className='clock'>
+      <img id='hours' src={Aguja} alt='aguja' />
+      <img id='minutes' src={AgujaMinutos} alt='agujaMinutos' />
+      <img id='seconds' src={AgujaSegundos} alt='agujaSegundos' />
+    </div>
   );
 }
 

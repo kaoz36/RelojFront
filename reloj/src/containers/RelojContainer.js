@@ -21,9 +21,9 @@ const RelojContainer = () => {
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
+  const [rotateHours, setRotateHours] = useState(0);
+  const [rotateMinutes, setRotateMinutes] = useState(0);
+  const [rotateSeconds, setRotateSeconds] = useState(0);
 
   /**
    * This method get the historical.
@@ -45,6 +45,12 @@ const RelojContainer = () => {
     getData();
   }, []);
 
+  const generateRotate = (hour, minute, second) => {
+    setRotateHours(hour / 12 * 360);
+    setRotateMinutes(minute / 60 * 360);
+    setRotateSeconds(second / 60 * 360);
+  }
+
   /**
    * This method generate a new record in mongo
    */
@@ -53,13 +59,11 @@ const RelojContainer = () => {
       hour: Math.floor(Math.random() * 24),
       minute: Math.floor(Math.random() * 60),
       second: Math.floor(Math.random() * 60)
-    }
+    } 
     saveNewRecord(time)
       .then((res) => {
         const { hour, minute, second } = res.data.time;
-        setHour(hour);
-        setMinute(minute);
-        setSecond(second);
+        generateRotate(hour, minute, second);
         getData();
       })
       .catch((err) => {
@@ -68,9 +72,7 @@ const RelojContainer = () => {
   }
 
   const handleClickRow = (row) => {
-    setHour(row.hour);
-    setMinute(row.minute);
-    setSecond(row.second);
+    generateRotate(row.hour, row.minute, row.second);
   }
   
   return (
@@ -79,10 +81,6 @@ const RelojContainer = () => {
       <TableHistorical 
         data={data}
         handleClickRow={handleClickRow} />
-      <Reloj 
-        hour={hour}
-        minute={minute}
-        second={second} />
       <Button 
         variant="contained"
         color="primary"
@@ -90,6 +88,10 @@ const RelojContainer = () => {
         onClick={handleClick} >
         Generar una nueva hora
       </Button>
+      <Reloj 
+        rotateHours={rotateHours}
+        rotateMinutes={rotateMinutes}
+        rotateSeconds={rotateSeconds} />
     </Fragment>
   );
 }

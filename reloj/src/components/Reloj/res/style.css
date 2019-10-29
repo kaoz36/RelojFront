@@ -1,0 +1,29 @@
+.clock {
+	padding: 100px;
+	background-image: url("reloj.jpg");
+	width: 350px;
+	height: 350px;
+	border-radius: 370px;
+	background-color: #ededed;
+	background-size: 100%;
+	border: 14px solid #555;
+	display: flex;
+	margin: auto;
+}
+
+.clock img {
+	position: relative;
+	height: 350px;
+	transition: all 0.5s
+}
+
+.clock #hours   {
+	position: absolute;
+}
+
+.clock #minutes   {
+	position: absolute;
+}
+.clock #seconds {
+	position: absolute;
+}
